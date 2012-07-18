@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<case xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="XSDValidator.xsd">
+	
+	<simulation>
+		<start_time value="0" unit="s"/>
+		<end_time value="3600" unit="s"/>
+		<time_step value="60" unit="s"/>
+		<space_step value="0.001" unit="m"/>
+		<initial_temperature value="277" unit="K"/>
+	</simulation>
+	<setup>
+		<materials>
+			<material name="polysterene" phase="solid">
+				<conductivity value="0.034" unit="W/mK"/>
+				<heat_capacity value="657." unit="J/kgK"/>
+				<density value="35." unit="kg/m3"/>
+				<emissivity value="0." unit="-"/>
+			</material>
+		</materials>
+		
+		<geometry>
+			<height value="1.0" unit="m"/>
+			<length value="1.0" unit="m"/>
+			<tilt value="90" unit="deg"/>
+		</geometry>
+		
+		<layers>
+			<boundary name="internal">
+				<temperature type="variable" unit="K">
+					 0 277.
+					 3600 300.
+					 7200 320.
+				</temperature>
+				<heat_transfer_coefficient value="8.1" unit="W/m2K"/>
+				<velocity value="0.0" unit="m/s"/>
+				<heat_flux value="0.0" unit="W/m2"/>
+			</boundary>
+			<layer name="polystyrene">
+				<geometry>
+					<thickness value="0.03" unit="m"/>
+				</geometry>
+				<material reference="polysterene"/>
+			</layer>
+			<boundary name="external">
+				<temperature value="277." unit="K"/>
+				<heat_transfer_coefficient value="8.1" unit="W/m2K"/>
+				<velocity value="0.0" unit="m/s"/>
+				<heat_flux value="0.0" unit="W/m2"/>
+			</boundary>
+		</layers>
+		
+	</setup>
+	
+	
+	
+	<output>
+		<screen>
+			<time_step value="60" unit="s"/>
+		</screen>
+		
+		<file>
+			<time_step value="60" unit="s"/>
+			<space_step value="0.001" unit="m"/>
+		</file>
+	</output>
+</case>

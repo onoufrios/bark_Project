@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<case xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="XSDValidator.xsd">
+<simulation>
+	<start_time value="0" unit="s"/>
+	<end_time value="432000" unit="s"/>
+	<time_step value="3600" unit="s"/>
+	<space_step value="0.01" unit="m"/>
+	<initial_temperature value="300" unit="K"/>
+</simulation>
+<setup>
+	<materials>
+		<material name="plaster" phase="solid">
+			<conductivity value="1." unit="W/mK"/>
+			<heat_capacity value="1000." unit="J/kgK"/>
+			<density value="1800." unit="kg/m3"/>
+			<emissivity value="1." unit="-"/>
+		</material>
+		<material name="concrete" phase="solid"> 
+			<conductivity value="2." unit="W/mK"/> 
+			<heat_capacity value="1000." unit="J/kgK"/>
+			<density value="2400." unit="kg/m3"/>
+		</material>
+	</materials>
+	<geometry>
+		<height value="1.0" unit="m"/>
+		<length value="1.0" unit="m"/>
+		<tilt value="90" unit="deg"/>
+	</geometry>
+	<layers>
+		<boundary name="internal">
+			<temperature value="300." unit="K"/>
+			<heat_transfer_coefficient value="7.7" unit="W/m2K"/>
+			<velocity value="0.0" unit="m/s"/>
+			<heat_flux value="0.0" unit="W/m2"/>
+		</boundary>
+		<layer name="plaster_in">
+			<geometry>
+				<thickness value="0.02" unit="m"/>
+			</geometry>
+			<material reference="plaster"/>
+		</layer>
+		<layer name="concrete">
+			<geometry>
+				<thickness value="0.30" unit="m"/>
+			</geometry>
+			<material reference="concrete"/>
+		</layer>
+		<layer name="plaster_out">
+			<geometry>
+				<thickness value="0.02" unit="m"/>
+			</geometry>
+			<material reference="plaster"/>
+		</layer>
+		<boundary name="external">
+			<temperature value="273." unit="K"/>
+			<heat_transfer_coefficient value="7.7" unit="W/m2K"/>
+			<velocity value="0.0" unit="m/s"/>
+			<heat_flux value="0.0" unit="W/m2"/>
+		</boundary>
+	</layers>
+</setup>
+<output>
+	<screen>
+		<time_step value="14400" unit="s"/>
+	</screen>
+	<file>
+		<time_step value="3600" unit="s"/>
+		<space_step value="0.02" unit="m"/>
+	</file>
+</output>
+</case>

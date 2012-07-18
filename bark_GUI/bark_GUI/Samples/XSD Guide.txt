@@ -1,0 +1,66 @@
+ELEMENT <xs:element name="___">
+
+	ELEMENT_TYPES (required)
+		simpleType <xs:element name="___" type="xs:some_simpleType">
+			<xs:element name="___" type="___" default="___"/> if this element does not get a value it will use the default value.
+			<xs:element name="___" type="___" fixed="___"/> this element cannot get a value other than the fixed value.
+			<xs:element name="___" type="___" use="required"/> this element must be present in the xml document. (default use="optional")
+			
+			COMMON_simpleType_LIST <xs:element name="___" type="xs:some_simpleType">
+				xs:string	Αλφαριθμητικό
+				xs:decimal	Δεκαδικός Αριθμός (με υποδιαστολή)
+				xs:integer	Ακέραιος Αριθμός (χωρίς υποδιαστολή)
+				xs:boolean	Λογικό (Αληθές/Ψευδές)
+				xs:date		Ημερομηνία ("YYYY-MM-DD" απαιτούνται όλα τα πεδία)
+				xs:time		Χρόνος ("hh:mm:ss" απαιτούνται όλα τα πεδία)
+				(simpleType elements may contain ONLY value, no attributs or elements)
+		
+		complexType <xs:complexType>
+			<xs:complexType mixed="true"> allows text TOGETHER with your attributes/elements. Χρήση σε type="variable". (optional)
+		
+		
+		Restrictions <xs:restriction base="xs:type"> (optional)
+			<xs:enumeration value="value01"/> limits the content of an XML element to a set of acceptable values.
+			<xs:minInclusive value="0"/> not lower than 0. (accepts 0)
+			<xs:minExclusive value="0"/> higher than 0. (does not accept 0)
+			<xs:maxInclusive value="120"/> not higher than 120. (accepts 120)
+			<xs:maxExclusive value="120"/> lower than 120. (does not accept 120)
+			<xs:pattern value="[0-9][0-9][0-9][0-9][0-9]"/> five digits in a sequence, and each digit must be in a range from 0 to 9. (many features)
+			<xs:length value="8"/> the value must be exactly eight characters.
+			<xs:fractionDigits value="2"/> specifies the maximum number of decimal places allowed.
+	
+	INDICATORS (required)
+		<xs:sequence> specifies that the child elements must appear in a specific order. (most common)
+		<xs:all> specifies that the child elements can appear in any order, and that each child element must occur only once.
+		<xs:choice> specifies that either one child element or another can occur.
+		
+		Number_of_Possible_Elements (optional)
+			<xs:element ... minOccurs="0"> specifies the minimum number of times an element can occur.
+			<xs:element ... maxOccurs="4"> specifies the maximum number of times an element can occur. (maxOccurs="unbounded")
+			
+		Indicators_Workaround
+			<xs:choice minOccurs="0" maxOccurs="unbounded"> it's like <xs:sequence> but without checking order. (can't make an element appear only 2 times)
+	
+	ATTRIBUTES <xs:attribute name="___" type="xs:some_simpleType"/> (optional)
+		<xs:attribute name="___" type="___" default="___"/> if this attribute does not get a value it will use the default value.
+		<xs:attribute name="___" type="___" fixed="___"/> this attribute cannot get a value other than the fixed value.
+		<xs:attribute name="___" type="___" use="required"/> this attribute must be present in the xml document. (default use="optional")
+		
+		COMMON_simpleType_LIST <xs:element name="___" type="xs:some_simpleType">
+			xs:string	Αλφαριθμητικό
+			xs:decimal	Δεκαδικός Αριθμός (με υποδιαστολή)
+			xs:integer	Ακέραιος Αριθμός (χωρίς υποδιαστολή)
+			xs:boolean	Λογικό (Αληθές/Ψευδές)
+			xs:date		Ημερομηνία ("YYYY-MM-DD" απαιτούνται όλα τα πεδία)
+			xs:time		Χρόνος ("hh:mm:ss" απαιτούνται όλα τα πεδία)
+			(simpleType elements may contain ONLY value, no attributs or elements)
+			
+		Restrictions <xs:restriction base="xs:type"> (optional)
+				<xs:enumeration value="value01"/> limits the content of an XML element to a set of acceptable values.
+				<xs:minInclusive value="0"/> not lower than 0. (accepts 0)
+				<xs:minExclusive value="0"/> higher than 0. (does not accept 0)
+				<xs:maxInclusive value="120"/> not higher than 120. (accepts 120)
+				<xs:maxExclusive value="120"/> lower than 120. (does not accept 120)
+				<xs:pattern value="[0-9][0-9][0-9][0-9][0-9]"/> five digits in a sequence, and each digit must be in a range from 0 to 9. (many features)
+				<xs:length value="8"/> the value must be exactly eight characters.
+				<xs:fractionDigits value="2"/> specifies the maximum number of decimal places allowed.

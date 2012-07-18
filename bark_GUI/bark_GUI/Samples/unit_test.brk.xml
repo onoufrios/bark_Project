@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<case xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="XSDValidator.xsd">
+<simulation>
+	<start_time value="0" unit="hour"/>
+	<end_time value="5" unit="day"/>
+	<time_step value="1" unit="hour"/>
+	<space_step value="0.01" unit="m"/>
+	<initial_temperature value="295" unit="K"/>
+</simulation>
+<setup>
+	<materials>
+		<material phase="solid" name="plaster">
+			<conductivity value="1." unit="W/mK"/>
+			<heat_capacity value="1000." unit="J/kgK"/>
+			<density value="1800." unit="kg/m3"/>
+		</material>
+		<material phase="solid" name="concrete"> 
+			<conductivity value="2." unit="W/mK"/> 
+			<heat_capacity value="1000." unit="J/kgK"/>
+			<density value="2400." unit="kg/m3"/>
+		</material>
+	</materials>
+	<geometry>
+		<height value="1.0" unit="m"/>
+		<length value="1.0" unit="m"/>
+		<tilt value="90" unit="deg"/>
+	</geometry>
+	<layers>
+		<boundary name="internal">
+			<temperature value="22" unit="degC"/>
+			<heat_transfer_coefficient value="7.7" unit="W/m2K"/>
+			<velocity value="36.0" unit="km/h"/>
+			<heat_flux value="0.0" unit="W/m2"/>
+		</boundary>
+		<layer name="plaster_in">
+			<geometry>
+				<thickness value="20" unit="mm"/>
+			</geometry>
+			<material reference="plaster"/>
+		</layer>
+		<layer name="concrete">
+			<geometry>
+				<thickness value="0.30" unit="m"/>
+			</geometry>
+			<material reference="concrete"/>
+		</layer>
+		<layer name="plaster_out">
+			<geometry>
+				<thickness value="0.02" unit="m"/>
+			</geometry>
+			<material reference="plaster"/>
+		</layer>
+		<boundary name="external">
+			<temperature type="variable" unit="degC" time_unit="hour">
+ 0 0.0
+ 1 50.0
+ 2 200.0
+			</temperature>
+			<heat_transfer_coefficient value="7.7" unit="W/m2K"/>
+			<velocity value="0.0" unit="m/s"/>
+			<heat_flux value="0.0" unit="W/m2"/>
+		</boundary>
+	</layers>
+</setup>
+<output>
+	<screen>
+		<time_step value="4" unit="hour"/>
+	</screen>
+	<file>
+		<time_step value="60" unit="min"/>
+		<space_step value="0.02" unit="m"/>
+	</file>
+</output>
+</case>

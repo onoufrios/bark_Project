@@ -1,0 +1,718 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <!--XML Structure
+  
+  <case>
+  
+      <simulation>
+            <start_time/>
+            <end_time/>
+            <time_step/>
+            <space_step/>
+            <initial_temperature/>
+      </simulation>
+      
+      <setup>
+          <materials>
+              <material>
+                  <conductivity/>
+                  <heat_capacity/>
+                  <density/>
+                  <emissivity/>
+              </material>
+          </materials>
+          
+          <geometry>
+              <height/>
+              <length/>
+              <tilt/>
+          </geometry>
+          
+          <layers>
+              <boundary>
+                  <temperature/>
+                  <heat_transfer_coefficient/>
+                  <velocity/>
+                  <heat_flux/>
+              </boundary>
+              <boundary>
+                  <temperature/>
+                  <heat_transfer_coefficient/>
+                  <velocity/>
+                  <heat_flux/>
+              </boundary>
+              <layer>
+                  <geometry>
+                      <thickness/>
+                  </geometry>
+                  <material/>
+              </layer>
+      </setup>
+      
+      <output>
+          <screen>
+            <time_step/>
+          </screen>
+          <file>
+            <time_step/>
+            <space_step/>
+          </file>
+          <graph>
+            <filename/>
+            <xvariable/>
+            <yvariable/>
+          </graph>
+      </output>
+    
+   </case>
+  -->
+  
+  <!--SEARCH-TAGS:
+  FIXHERE
+  CHECKHERE
+  
+  (END) StartElement <name>
+  (END) BaseElement <name>
+  (END) InnerElement D(#) <name>
+  (END) AttributeElement <name>
+  -->
+  
+  
+  
+  
+  <!--StartElement <case>-->
+  <xs:element name="case">
+    <xs:complexType>
+      <xs:sequence>
+        
+        <!--BaseElement <simulation>-->
+        <xs:element name="simulation">
+          <xs:complexType>
+            <xs:all>
+
+              <!--AttributeElement <start_time>-->
+              <xs:element name="start_time">
+                <xs:complexType>
+                  <xs:attribute name="value" type="xs:decimal" use="required"/>
+                  <xs:attribute name="unit" type="unit_time" default="s"/>
+                </xs:complexType>
+              </xs:element>
+              <!--AttributeElement <end_time>-->
+              <xs:element name="end_time">
+                <xs:complexType>
+                  <xs:attribute name="value" type="xs:decimal" use="required"/>
+                  <xs:attribute name="unit" type="unit_time" default="s"/>
+                </xs:complexType>
+              </xs:element>
+              <!--AttributeElement <time_step>-->
+              <xs:element name="time_step">
+                <xs:complexType>
+                  <xs:attribute name="value" type="decimal_positive" use="required"/>
+                  <xs:attribute name="unit" type="unit_time" default="s"/>
+                </xs:complexType>
+              </xs:element>
+              <!--AttributeElement <space_step>-->
+              <xs:element name="space_step">
+                <xs:complexType>
+                  <xs:attribute name="value" type="decimal_positive" use="required"/>
+                  <xs:attribute name="unit" type="unit_space" default="m"/>
+                </xs:complexType>
+              </xs:element>
+              <!--AttributeElement <initial_temperature>-->
+              <xs:element name="initial_temperature">
+                <xs:complexType>
+                  <xs:attribute name="value" type="xs:integer" use="required"/>
+                  <xs:attribute name="unit" type="unit_temperature" default="K"/>
+                </xs:complexType>
+              </xs:element>
+
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <!--END BaseElement <simulation>-->
+
+
+
+
+        <!--BaseElement <setup>-->
+        <xs:element name="setup">
+          <xs:complexType>
+            <xs:sequence>
+              <!--InnerElement D1 <materials>-->
+              <xs:element name="materials">
+                <xs:complexType>
+                  <xs:sequence>
+                    <!--InnerElement D2 <material>-->
+                    <xs:element name="material" minOccurs="1" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:all>
+                          <!--AttributeElement <conductivity>-->
+                          <xs:element name="conductivity" minOccurs="0">                             <!--CHECKHERE required?-->
+                            <xs:complexType>
+                              <xs:attribute name="value" type="xs:decimal" use="required"/>
+                              <xs:attribute name="unit" type="unit_conductivity" default="W/mK"/>
+                            </xs:complexType>
+                          </xs:element>
+                          <!--AttributeElement <heat_capacity>-->
+                          <xs:element name="heat_capacity" minOccurs="0">                             <!--CHECKHERE required?-->
+                            <xs:complexType>
+                              <xs:attribute name="value" type="xs:decimal" use="required"/>
+                              <xs:attribute name="unit" type="unit_heat_capacity" default="J/kgK"/>
+                            </xs:complexType>
+                          </xs:element>
+                          <!--AttributeElement <density>-->
+                          <xs:element name="density" minOccurs="0">                                    <!--CHECKHERE required?-->
+                            <xs:complexType>
+                              <xs:attribute name="value" type="xs:decimal" use="required"/>
+                              <xs:attribute name="unit" type="unit_density" default="kg/m3"/>
+                            </xs:complexType>
+                          </xs:element>
+                          <!--AttributeElement <emissivity>-->
+                          <xs:element name="emissivity" minOccurs="0">                                   <!--CHECKHERE required?-->
+                            <xs:complexType>
+                              <xs:attribute name="value" type="xs:decimal" default="1.0"/>
+                              <xs:attribute name="unit" type="null" default="null"/>                     <!--CHECKHERE type=null-->
+                            </xs:complexType>
+                          </xs:element>
+                          
+                        </xs:all>
+                        <xs:attribute name="name" type="xs:string" use="required"/>
+                        <xs:attribute name="phase" type="material_phase" default="solid"/>
+                        
+                      </xs:complexType>
+                    </xs:element>
+                    <!--END InnerElement D2 <material>-->
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <!--END InnerElement D1 <materials>-->
+
+              <!--InnerElement D1 <geometry>-->
+              <xs:element name="geometry">
+                <xs:complexType>
+                  <xs:sequence>
+                    <!--AttributeElement <height>-->
+                    <xs:element name="height">
+                      <xs:complexType>
+                        <xs:attribute name="value" type="xs:decimal" use="required"/>
+                        <xs:attribute name="unit" type="unit_space" default="m"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <!--AttributeElement <length>-->
+                    <xs:element name="length">
+                      <xs:complexType>
+                        <xs:attribute name="value" type="xs:decimal" use="required"/>
+                        <xs:attribute name="unit" type="unit_space" default="m"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <!--AttributeElement <tilt>-->
+                    <xs:element name="tilt">
+                      <xs:complexType>
+                        <xs:attribute name="value" type="xs:decimal" use="required"/>
+                        <xs:attribute name="unit" type="unit_angle" default="deg"/>
+                      </xs:complexType>
+                    </xs:element>
+                    
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <!--END InnerElement D1 <geometry>-->
+
+              <!--InnerElement D1 <coordinates>-->
+              <xs:element name="coordinates" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <!--AttributeElement <latitude>-->
+                    <xs:element name="latitude">
+                      <xs:complexType>
+                        <xs:attribute name="value" type="xs:decimal"/>                             <!--CHECKHERE default value-->
+                        <xs:attribute name="unit" type="unit_angle" default="deg"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <!--AttributeElement <longitude>-->
+                    <xs:element name="longitude">
+                      <xs:complexType>
+                        <xs:attribute name="value" type="xs:decimal"/>                             <!--CHECKHERE default value-->
+                        <xs:attribute name="unit" type="unit_angle" default="deg"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <!--AttributeElement <orientation>-->
+                    <xs:element name="orientation">
+                      <xs:complexType>
+                        <xs:attribute name="value" type="xs:decimal"/>                             <!--CHECKHERE default value-->
+                        <xs:attribute name="unit" type="unit_angle" default="deg"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <!--AttributeElement <date>-->
+                    <xs:element name="date" minOccurs="0">                             <!--CHECKHERE date format. There is no value/unit-->
+                      <xs:complexType>
+                        <xs:attribute name="year" type="date_year"/>
+                        <xs:attribute name="month" type="date_month"/>
+                        <xs:attribute name="day" type="date_day"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <!--AttributeElement <time>-->
+                    <xs:element name="time" minOccurs="0">                             <!--CHECKHERE date format. There is no value/unit-->
+                      <xs:complexType>
+                        <xs:attribute name="hour" type="time_hour"/>
+                        <xs:attribute name="minute" type="time_minute"/>
+                        <xs:attribute name="second" type="time_second"/>
+                        <xs:attribute name="zone" type="time_zone"/>
+                      </xs:complexType>
+                    </xs:element>
+
+                  </xs:sequence>
+                  <xs:attribute name="name" type="xs:string" default="Unknown"/>                    <!--CHECKHERE default value-->
+                </xs:complexType>
+              </xs:element>
+              <!--END InnerElement D1 <coordinates>-->
+
+              <!--InnerElement D1 <layers>-->
+              <xs:element name="layers">
+                <xs:complexType>
+                  <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    
+                    <!--InnerElement D2 <boundary>-->
+                    <xs:element name="boundary">                                        <!-- CHECKHERE can't control the number of boundaries to allow disorder -->
+                      <xs:complexType>
+                        <xs:sequence>
+                          <!--InnerElement D3 <temperature>-->
+                          <xs:element name="temperature">
+                            <xs:complexType mixed="true">                               <!--FIXHERE add the mixed="true" to other elements that might have text-values with attributes/elements-->
+                              <xs:sequence minOccurs="0">
+                                <!--AttributeElement <temperature_max>-->
+                                <xs:element name="temperature_max">
+                                  <xs:complexType>
+                                    <xs:attribute name="value" type="decimal_null" default="null"/> <!--CHECKHERE add to other elements with this possibility-->
+                                    <xs:attribute name="unit" type="unit_temperature" default="K"/>
+                                  </xs:complexType>
+                                </xs:element>
+                                <!--AttributeElement <temperature_min>-->
+                                <xs:element name="temperature_min">
+                                  <xs:complexType>
+                                    <xs:attribute name="value" type="decimal_null" default="null"/> <!--CHECKHERE add to other elements with this possibility-->
+                                    <xs:attribute name="unit" type="unit_temperature" default="K"/>
+                                  </xs:complexType>
+                                </xs:element>
+                                <!--AttributeElement <time_cycle>-->
+                                <xs:element name="time_cycle">
+                                  <xs:complexType>
+                                    <xs:attribute name="value" type="xs:integer" default="0"/> <!--CHECKHERE add to other elements with this possibility-->
+                                    <xs:attribute name="unit" type="unit_time" default="day"/>
+                                  </xs:complexType>
+                                </xs:element>
+                                <!--AttributeElement <time_offset>-->
+                                <xs:element name="time_offset">
+                                  <xs:complexType>
+                                    <xs:attribute name="value" type="xs:integer" default="0"/> <!--CHECKHERE add to other elements with this possibility-->
+                                    <xs:attribute name="unit" type="unit_time" default="hour"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              
+                              <xs:attribute name="type" type="input_element_type" default="constant"/> <!--CHECKHERE default value and add to other elements with this possibility-->
+                              <xs:attribute name="value" type="decimal_null" default="null"/> <!--CHECKHERE add to other elements with this possibility--><!--OH: value is required if type=="constant"-->
+                              <xs:attribute name="unit" type="unit_temperature" default="K"/> <!--CHECKHERE default value-->
+                              <xs:attribute name="time_unit" type="unit_time" default="hour"/> <!--CHECKHERE default value-->
+                              
+                            </xs:complexType>
+                          </xs:element>
+                          <!--END InnerElement D3 <temperature>-->
+                          <!--AttributeElement <heat_transfer_coefficient>-->
+                          <xs:element name="heat_transfer_coefficient">
+                            <xs:complexType>
+                              <xs:attribute name="type" type="input_element_type" default="constant"/>
+                              <xs:attribute name="value" type="xs:decimal" use="required"/>                       <!--OH: value is required if type=="constant"-->
+                              <xs:attribute name="unit" type="unit_heat_transfer_coefficient" default="W/m2K"/>
+                            </xs:complexType>
+                          </xs:element>
+                          <!--AttributeElement <velocity>-->
+                          <xs:element name="velocity">
+                            <xs:complexType>
+                              <xs:attribute name="type" type="input_element_type" default="constant"/>
+                              <xs:attribute name="value" type="xs:decimal" default="0.0"/>
+                              <xs:attribute name="unit" type="unit_velocity" default="m/s"/>
+                            </xs:complexType>
+                          </xs:element>
+                          <!--InnerElement D3 <heat_flux>-->
+                          <xs:element name="heat_flux">
+                            <xs:complexType>
+                              <xs:sequence minOccurs="0">
+                                <!--AttributeElement <function>-->
+                                <xs:element name="function">
+                                  <xs:complexType>
+                                    <xs:attribute name="type" type="xs:string"/> <!--FIXHERE type & CHECKHERE default value-->
+                                    <xs:attribute name="side" type="xs:string"/> <!--FIXHERE type & CHECKHERE default value-->
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute name="type" type="input_element_type" default="constant"/>
+                              <xs:attribute name="value" type="xs:decimal" default="0.0"/>
+                              <xs:attribute name="unit" type="unit_heat_flux" default="W/m2"/>
+                              
+                            </xs:complexType>
+                          </xs:element>
+                          <!--END InnerElement D3 <heat_flux>-->
+                          
+                        </xs:sequence>
+                        <xs:attribute name="name" type="xs:string" default="Unknown"/>
+                        
+                      </xs:complexType>
+                    </xs:element>
+                    <!--END InnerElement D2 <boundary>-->
+                    
+                    
+                    <!--InnerElement D2 <layer>-->
+                    <xs:element name="layer">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <!--InnerElement D3 <geometry>-->
+                          <xs:element name="geometry">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <!--AttributeElement <thickness>-->
+                                <xs:element name="thickness">
+                                  <xs:complexType>
+                                    <xs:attribute name="value" type="xs:decimal" use="required"/>
+                                    <xs:attribute name="unit" type="unit_space" default="m"/>
+                                  </xs:complexType>
+                                </xs:element>
+                                
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <!--END InnerElement D3 <geometry>-->
+                          
+                          <!--AttributeElement <material>-->
+                          <xs:element name="material">
+                            <xs:complexType>
+                              <xs:attribute name="reference" type="xs:string" use="required"/>
+                            </xs:complexType>
+                          </xs:element>
+                          
+                        </xs:sequence>
+                        <xs:attribute name="name" type="xs:string" default="Unknown"/>
+
+                      </xs:complexType>
+                    </xs:element>
+                    <!--END InnerElement D2 <layer>-->
+
+                  </xs:choice>
+                </xs:complexType>
+              </xs:element>
+              <!--END InnerElement D1 <layers>-->
+              
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!--END BaseElement <setup>-->
+
+
+        <!--BaseElement <output>-->
+        <xs:element name="output">
+          <xs:complexType>
+            <xs:sequence>
+              <!--InnerElement D1 <screen>-->
+              <xs:element name="screen">
+                <xs:complexType>
+                  <xs:sequence>
+                    <!--AttributeElement <time_step>-->
+                    <xs:element name="time_step">
+                      <xs:complexType>
+                        <xs:attribute name="value" type="decimal_positive" use="required"/>
+                        <xs:attribute name="unit" type="unit_time" default="s"/>
+                      </xs:complexType>
+                    </xs:element>
+                    
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <!--END InnerElement D1 <screen>-->
+
+              <!--InnerElement D1 <file>-->
+              <xs:element name="file">
+                <xs:complexType>
+                  <xs:sequence>
+                    <!--AttributeElement <time_step>-->
+                    <xs:element name="time_step">
+                      <xs:complexType>
+                        <xs:attribute name="value" type="decimal_positive" use="required"/>
+                        <xs:attribute name="unit" type="unit_time" default="s"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <!--AttributeElement <space_step>-->
+                    <xs:element name="space_step">
+                      <xs:complexType>
+                        <xs:attribute name="value" type="xs:decimal" use="required"/>
+                        <xs:attribute name="unit" type="unit_space" default="m"/>
+                      </xs:complexType>
+                    </xs:element>
+                    
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <!--END InnerElement D1 <file>-->
+
+              <!--InnerElement D1 <graph>-->  <!--CHECKHERE proper names, attributes, values, types and add any default valus-->
+              <xs:element name="graph" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <!--AttributeElement <filename>-->
+                    <xs:element name="filename">
+                      <xs:complexType>
+                        <xs:attribute name="name" type="xs:string"/>
+                        <xs:attribute name="filename" type="xs:string"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <!--AttributeElement <xvariable>-->
+                    <xs:element name="xvariable">
+                      <xs:complexType>
+                        <xs:attribute name="title" type="xs:string"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <!--AttributeElement <yvariable>-->
+                    <xs:element name="yvariable">
+                      <xs:complexType>
+                        <xs:attribute name="title" type="xs:string"/>
+                      </xs:complexType>
+                    </xs:element>
+                    
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <!--END InnerElement D1 <graph>-->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!--END BaseElement <output>-->
+        
+        
+        
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <!--END StartElement <case>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- UNITS -->
+  <!-- UNITS -->
+  <!-- UNITS -->
+  
+  <!-- UNIT VALUES in SimpleTypes -->
+  <xs:simpleType name="unit_temperature">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="degC"/>
+      <xs:enumeration value="K"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="unit_time">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="s"/>
+      <xs:enumeration value="min"/>
+      <xs:enumeration value="hour"/>
+      <xs:enumeration value="day"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="unit_space">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="m"/>
+      <xs:enumeration value="cm"/>
+      <xs:enumeration value="mm"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="unit_velocity">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="m/s"/>
+      <xs:enumeration value="km/h"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="unit_angle">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="deg"/>
+      <xs:enumeration value="rad"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="unit_conductivity">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="W/mK"/>
+    </xs:restriction>
+  </xs:simpleType>
+ 
+  <xs:simpleType name="unit_heat_capacity">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="J/kgK"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="unit_heat_transfer_coefficient">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="W/m2K"/>
+    </xs:restriction>
+  </xs:simpleType>
+ 
+  <xs:simpleType name="unit_heat_flux">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="W/m2"/>
+    </xs:restriction>
+  </xs:simpleType> 
+  
+  <xs:simpleType name="unit_density">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="kg/m3"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+
+
+
+
+
+
+  <!-- SPECIAL TYPES -->
+  <!-- SPECIAL TYPES -->
+  <!-- SPECIAL TYPES -->
+  
+  
+  
+
+
+
+
+  <!-- MATERIAL PHASE type in SimpleTypes -->
+  <xs:simpleType name="material_phase">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="solid"/>
+      <xs:enumeration value="liquid"/>
+      <xs:enumeration value="gas"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- INPUT ELEMENT types in SimpleTypes -->
+  <xs:simpleType name ="input_element_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="constant"/>
+      <xs:enumeration value="variable"/>
+      <xs:enumeration value="function"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- UTILITY -->
+  <!-- UTILITY -->
+  <!-- UTILITY -->
+
+
+
+
+
+
+  <!-- POSITIVE SimpleTypes -->
+  <xs:simpleType name="decimal_positive">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  
+  <!-- NULLABLE SimpleTypes -->
+  <xs:simpleType name="null">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="null"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="decimal_null">
+    <xs:union memberTypes="xs:decimal null"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="integer_null">
+    <xs:union memberTypes="xs:integer null"/>
+  </xs:simpleType>
+
+  
+  <!-- CUSTOM DATE in SimpleTypes -->
+  <xs:simpleType name="date_year">
+    <xs:restriction base="xs:positiveInteger">
+      <xs:maxInclusive value="3000"/>
+      <xs:minInclusive value="1800"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="date_month">
+    <xs:restriction base="xs:positiveInteger">
+      <xs:maxInclusive value="12"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="date_day">
+    <xs:restriction base="xs:positiveInteger">
+      <xs:maxInclusive value="31"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="time_hour">
+    <xs:restriction base="xs:nonNegativeInteger">
+      <xs:maxInclusive value="24"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="time_minute">
+    <xs:restriction base="xs:nonNegativeInteger">
+      <xs:maxExclusive value="60"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="time_second">
+    <xs:restriction base="xs:nonNegativeInteger">
+      <xs:maxExclusive value="60"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="time_zone">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\+?[0-1][0-4](:00)?|\+?[0-9](:00)?|-[0-1][0-2](:00)?|-[1-9](:00)?|0*:?0*Z"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="date_zone">
+    <xs:restriction base="time_zone"/>
+  </xs:simpleType>
+
+
+  
+  
+  
+  
+  
+</xs:schema>
