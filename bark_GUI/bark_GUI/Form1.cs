@@ -20,6 +20,8 @@ namespace bark_GUI
         {
             File testFile = new File();
             testFile.Load();
+            viewerForm form1 = new viewerForm();
+            form1.Show();
         }
     }
 }
