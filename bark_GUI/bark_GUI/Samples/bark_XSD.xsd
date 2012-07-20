@@ -92,11 +92,8 @@
             <xs:all>
 
               <!--AttributeElement <start_time>-->
-              <xs:element name="start_time">
-                <xs:complexType>
-                  <xs:attribute name="value" type="xs:decimal" use="required"/>
-                  <xs:attribute name="unit" type="unit_time" default="s"/>
-                </xs:complexType>
+              <xs:element name="start_time" type="test">
+                
               </xs:element>
               <!--AttributeElement <end_time>-->
               <xs:element name="end_time">
@@ -148,21 +145,21 @@
                       <xs:complexType>
                         <xs:all>
                           <!--AttributeElement <conductivity>-->
-                          <xs:element name="conductivity" minOccurs="0">                             <!--CHECKHERE required?-->
+                          <xs:element name="conductivity">
                             <xs:complexType>
                               <xs:attribute name="value" type="xs:decimal" use="required"/>
                               <xs:attribute name="unit" type="unit_conductivity" default="W/mK"/>
                             </xs:complexType>
                           </xs:element>
                           <!--AttributeElement <heat_capacity>-->
-                          <xs:element name="heat_capacity" minOccurs="0">                             <!--CHECKHERE required?-->
+                          <xs:element name="heat_capacity">
                             <xs:complexType>
                               <xs:attribute name="value" type="xs:decimal" use="required"/>
                               <xs:attribute name="unit" type="unit_heat_capacity" default="J/kgK"/>
                             </xs:complexType>
                           </xs:element>
                           <!--AttributeElement <density>-->
-                          <xs:element name="density" minOccurs="0">                                    <!--CHECKHERE required?-->
+                          <xs:element name="density">
                             <xs:complexType>
                               <xs:attribute name="value" type="xs:decimal" use="required"/>
                               <xs:attribute name="unit" type="unit_density" default="kg/m3"/>
@@ -273,7 +270,48 @@
                 <xs:complexType>
                   <xs:choice minOccurs="0" maxOccurs="unbounded">
                     
-                    <!--InnerElement D2 <boundary>-->
+                    <!--InnerElement D2 <layer>-->
+                    <xs:element name="layer">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <!--InnerElement D3 <geometry>-->
+                          <xs:element name="geometry">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <!--AttributeElement <thickness>-->
+                                <xs:element name="thickness">
+                                  <xs:complexType>
+                                    <xs:attribute name="value" type="xs:decimal" use="required"/>
+                                    <xs:attribute name="unit" type="unit_space" default="m"/>
+                                  </xs:complexType>
+                                </xs:element>
+                                
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <!--END InnerElement D3 <geometry>-->
+                          
+                          <!--AttributeElement <material>-->
+                          <xs:element name="material">
+                            <xs:complexType>
+                              <xs:attribute name="reference" type="xs:string" use="required"/>
+                            </xs:complexType>
+                          </xs:element>
+                          
+                        </xs:sequence>
+                        <xs:attribute name="name" type="xs:string" default="Unknown"/>
+
+                      </xs:complexType>
+                    </xs:element>
+                    <!--END InnerElement D2 <layer>-->
+
+                  </xs:choice>
+                </xs:complexType>
+              </xs:element>
+              <!--END InnerElement D1 <layers>-->
+			  
+			  <!-- FIXHERE -->
+			  <!--InnerElement D2 <boundary>-->
                     <xs:element name="boundary">                                        <!-- CHECKHERE can't control the number of boundaries to allow disorder -->
                       <xs:complexType>
                         <xs:sequence>
@@ -361,47 +399,6 @@
                       </xs:complexType>
                     </xs:element>
                     <!--END InnerElement D2 <boundary>-->
-                    
-                    
-                    <!--InnerElement D2 <layer>-->
-                    <xs:element name="layer">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <!--InnerElement D3 <geometry>-->
-                          <xs:element name="geometry">
-                            <xs:complexType>
-                              <xs:sequence>
-                                <!--AttributeElement <thickness>-->
-                                <xs:element name="thickness">
-                                  <xs:complexType>
-                                    <xs:attribute name="value" type="xs:decimal" use="required"/>
-                                    <xs:attribute name="unit" type="unit_space" default="m"/>
-                                  </xs:complexType>
-                                </xs:element>
-                                
-                              </xs:sequence>
-                            </xs:complexType>
-                          </xs:element>
-                          <!--END InnerElement D3 <geometry>-->
-                          
-                          <!--AttributeElement <material>-->
-                          <xs:element name="material">
-                            <xs:complexType>
-                              <xs:attribute name="reference" type="xs:string" use="required"/>
-                            </xs:complexType>
-                          </xs:element>
-                          
-                        </xs:sequence>
-                        <xs:attribute name="name" type="xs:string" default="Unknown"/>
-
-                      </xs:complexType>
-                    </xs:element>
-                    <!--END InnerElement D2 <layer>-->
-
-                  </xs:choice>
-                </xs:complexType>
-              </xs:element>
-              <!--END InnerElement D1 <layers>-->
               
             </xs:sequence>
           </xs:complexType>
@@ -508,7 +505,10 @@
 
 
 
-
+<xs:complexType name="test">
+  <xs:attribute name="value" type="xs:decimal" use="required"/>
+  <xs:attribute name="unit" type="unit_time" default="s"/>
+</xs:complexType>
 
 
   <!-- UNITS -->
@@ -700,8 +700,9 @@
   </xs:simpleType>
 
   <xs:simpleType name="time_zone">
-    <xs:restriction base="xs:string">
-      <xs:pattern value="\+?[0-1][0-4](:00)?|\+?[0-9](:00)?|-[0-1][0-2](:00)?|-[1-9](:00)?|0*:?0*Z"/>
+    <xs:restriction base="xs:integer">
+      <xs:maxInclusive value="12"/>
+      <xs:minInclusive value="-12"/>
     </xs:restriction>
   </xs:simpleType>
 

@@ -3,7 +3,7 @@
 	xsi:noNamespaceSchemaLocation="XSDValidator.xsd">
 	
 	<simulation>
-		<start_time value="0" unit="s"/>
+		<start_time unit="s"> 0 </start_time>
 		<end_time value="3600" unit="s"/>
 		<time_step value="60" unit="s"/>
 		<space_step value="0.001" unit="m"/>
