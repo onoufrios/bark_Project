@@ -91,11 +91,38 @@
           <xs:complexType>
             <xs:all>
 
-              <xs:element name="start_time" type="time"/>
-              <xs:element name="end_time" type="time"/>
-              <xs:element name="time_step" type="time_positive"/>
-              <xs:element name="space_step" type="space"/>
-              <xs:element name="initial_temperature" type="temperature"/>
+              <!--AttributeElement <start_time>-->
+              <xs:element name="start_time" type="test">
+
+              </xs:element>
+              <!--AttributeElement <end_time>-->
+              <xs:element name="end_time">
+                <xs:complexType>
+                  <xs:attribute name="value" type="xs:decimal" use="required"/>
+                  <xs:attribute name="unit" type="unit_time" default="s"/>
+                </xs:complexType>
+              </xs:element>
+              <!--AttributeElement <time_step>-->
+              <xs:element name="time_step">
+                <xs:complexType>
+                  <xs:attribute name="value" type="decimal_positive" use="required"/>
+                  <xs:attribute name="unit" type="unit_time" default="s"/>
+                </xs:complexType>
+              </xs:element>
+              <!--AttributeElement <space_step>-->
+              <xs:element name="space_step">
+                <xs:complexType>
+                  <xs:attribute name="value" type="decimal_positive" use="required"/>
+                  <xs:attribute name="unit" type="unit_space" default="m"/>
+                </xs:complexType>
+              </xs:element>
+              <!--AttributeElement <initial_temperature>-->
+              <xs:element name="initial_temperature">
+                <xs:complexType>
+                  <xs:attribute name="value" type="xs:integer" use="required"/>
+                  <xs:attribute name="unit" type="unit_temperature" default="K"/>
+                </xs:complexType>
+              </xs:element>
 
             </xs:all>
           </xs:complexType>
@@ -114,14 +141,39 @@
                 <xs:complexType>
                   <xs:sequence>
                     <!--InnerElement D2 <material>-->
-                    <xs:element name="material" maxOccurs="unbounded">
+                    <xs:element name="material" minOccurs="1" maxOccurs="unbounded">
                       <xs:complexType>
                         <xs:all>
-                          
-                          <xs:element name="conductivity" type="conductivity"/>
-                          <xs:element name="heat_capacity" type="heat_capacity"/>
-                          <xs:element name="density" type="density"/>
-                          <xs:element name="emissivity" type="emissivity" minOccurs="0" default="1.0"/>
+                          <!--AttributeElement <conductivity>-->
+                          <xs:element name="conductivity">
+                            <xs:complexType>
+                              <xs:attribute name="value" type="xs:decimal" use="required"/>
+                              <xs:attribute name="unit" type="unit_conductivity" default="W/mK"/>
+                            </xs:complexType>
+                          </xs:element>
+                          <!--AttributeElement <heat_capacity>-->
+                          <xs:element name="heat_capacity">
+                            <xs:complexType>
+                              <xs:attribute name="value" type="xs:decimal" use="required"/>
+                              <xs:attribute name="unit" type="unit_heat_capacity" default="J/kgK"/>
+                            </xs:complexType>
+                          </xs:element>
+                          <!--AttributeElement <density>-->
+                          <xs:element name="density">
+                            <xs:complexType>
+                              <xs:attribute name="value" type="xs:decimal" use="required"/>
+                              <xs:attribute name="unit" type="unit_density" default="kg/m3"/>
+                            </xs:complexType>
+                          </xs:element>
+                          <!--AttributeElement <emissivity>-->
+                          <xs:element name="emissivity" minOccurs="0">
+                            <!--CHECKHERE required?-->
+                            <xs:complexType>
+                              <xs:attribute name="value" type="xs:decimal" default="1.0"/>
+                              <xs:attribute name="unit" type="null" default="null"/>
+                              <!--CHECKHERE type=null-->
+                            </xs:complexType>
+                          </xs:element>
 
                         </xs:all>
                         <xs:attribute name="name" type="xs:string" use="required"/>
@@ -139,10 +191,27 @@
               <xs:element name="geometry">
                 <xs:complexType>
                   <xs:sequence>
-                    
-                    <xs:element name="height" type="space"/>
-                    <xs:element name="length" type="space"/>
-                    <xs:element name="tilt" type="angle"/>
+                    <!--AttributeElement <height>-->
+                    <xs:element name="height">
+                      <xs:complexType>
+                        <xs:attribute name="value" type="xs:decimal" use="required"/>
+                        <xs:attribute name="unit" type="unit_space" default="m"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <!--AttributeElement <length>-->
+                    <xs:element name="length">
+                      <xs:complexType>
+                        <xs:attribute name="value" type="xs:decimal" use="required"/>
+                        <xs:attribute name="unit" type="unit_space" default="m"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <!--AttributeElement <tilt>-->
+                    <xs:element name="tilt">
+                      <xs:complexType>
+                        <xs:attribute name="value" type="xs:decimal" use="required"/>
+                        <xs:attribute name="unit" type="unit_angle" default="deg"/>
+                      </xs:complexType>
+                    </xs:element>
 
                   </xs:sequence>
                 </xs:complexType>
@@ -153,16 +222,53 @@
               <xs:element name="coordinates" minOccurs="0">
                 <xs:complexType>
                   <xs:sequence>
-                    
-                    <xs:element name="latitude" type="angle" minOccurs="0"/>
-                    <xs:element name="longitude" type="angle" minOccurs="0"/>
-                    <xs:element name="orientation" type="angle" minOccurs="0"/>
-                    <xs:element name="date" type="date" minOccurs="0"/>
-                    <xs:element name="time" type="dateTime" minOccurs="0"/>
+                    <!--AttributeElement <latitude>-->
+                    <xs:element name="latitude">
+                      <xs:complexType>
+                        <xs:attribute name="value" type="xs:decimal"/>
+                        <!--CHECKHERE default value-->
+                        <xs:attribute name="unit" type="unit_angle" default="deg"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <!--AttributeElement <longitude>-->
+                    <xs:element name="longitude">
+                      <xs:complexType>
+                        <xs:attribute name="value" type="xs:decimal"/>
+                        <!--CHECKHERE default value-->
+                        <xs:attribute name="unit" type="unit_angle" default="deg"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <!--AttributeElement <orientation>-->
+                    <xs:element name="orientation">
+                      <xs:complexType>
+                        <xs:attribute name="value" type="xs:decimal"/>
+                        <!--CHECKHERE default value-->
+                        <xs:attribute name="unit" type="unit_angle" default="deg"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <!--AttributeElement <date>-->
+                    <xs:element name="date" minOccurs="0">
+                      <!--CHECKHERE date format. There is no value/unit-->
+                      <xs:complexType>
+                        <xs:attribute name="year" type="date_year"/>
+                        <xs:attribute name="month" type="date_month"/>
+                        <xs:attribute name="day" type="date_day"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <!--AttributeElement <time>-->
+                    <xs:element name="time" minOccurs="0">
+                      <!--CHECKHERE date format. There is no value/unit-->
+                      <xs:complexType>
+                        <xs:attribute name="hour" type="time_hour"/>
+                        <xs:attribute name="minute" type="time_minute"/>
+                        <xs:attribute name="second" type="time_second"/>
+                        <xs:attribute name="zone" type="time_zone"/>
+                      </xs:complexType>
+                    </xs:element>
 
                   </xs:sequence>
-                  <xs:attribute name="name" type="xs:string" default="Unknown"/>          <!--CHECKHERE default value-->
-                  
+                  <xs:attribute name="name" type="xs:string" default="Unknown"/>
+                  <!--CHECKHERE default value-->
                 </xs:complexType>
               </xs:element>
               <!--END InnerElement D1 <coordinates>-->
@@ -180,8 +286,13 @@
                           <xs:element name="geometry">
                             <xs:complexType>
                               <xs:sequence>
-                                
-                                <xs:element name="thickness" type="space"/>
+                                <!--AttributeElement <thickness>-->
+                                <xs:element name="thickness">
+                                  <xs:complexType>
+                                    <xs:attribute name="value" type="xs:decimal" use="required"/>
+                                    <xs:attribute name="unit" type="unit_space" default="m"/>
+                                  </xs:complexType>
+                                </xs:element>
 
                               </xs:sequence>
                             </xs:complexType>
@@ -191,7 +302,7 @@
                           <!--AttributeElement <material>-->
                           <xs:element name="material">
                             <xs:complexType>
-                              <xs:attribute name="reference" type="xs:string" use="required"/> <!-- FIXHERE KEYREF & KEY -->
+                              <xs:attribute name="reference" type="xs:string" use="required"/>
                             </xs:complexType>
                           </xs:element>
 
@@ -410,149 +521,23 @@
 
 
 
-  <!-- INPUT ELEMENT TYPES -->
-
-  <xs:group name="input_element_type">
-    <xs:choice>
-      <xs:element name="constant" type="xs:decimal"/>
-      <xs:element name="variable">
-        <xs:simpleType>
-          <xs:list itemType="xs:decimal"/>
-        </xs:simpleType>
-      </xs:element>
-      <xs:element name="function">
-        <xs:complexType>
-          <xs:choice>
-            <xs:element name="funcNo1"/>    <!-- FIXHERE Insert Functions -->
-            <xs:element name="funcNo2"/>
-            <xs:element name="funcNo3"/>
-            <xs:element name="funcNo4"/>
-          </xs:choice>
-        </xs:complexType>
-        
-      </xs:element>
-    </xs:choice>
-  </xs:group>
-
-  <xs:group name="input_element_type_positive">
-    <xs:choice>
-      <xs:element name="constant" type="decimal_positive"/>
-      <xs:element name="variable">
-        <xs:simpleType>
-          <xs:list itemType="decimal_positive"/>
-        </xs:simpleType>
-      </xs:element>
-      <xs:element name="function">
-        <xs:complexType>
-          <xs:choice>
-            <xs:element name="funcNo1"/>
-            <!-- FIXHERE Insert Functions -->
-            <xs:element name="funcNo2"/>
-            <xs:element name="funcNo3"/>
-            <xs:element name="funcNo4"/>
-          </xs:choice>
-        </xs:complexType>
-
-      </xs:element>
-    </xs:choice>
-  </xs:group>
 
 
 
 
 
 
-  <!-- ComplexTypes -->
 
-  <xs:complexType name="temperature">
-    <xs:group ref="input_element_type"/>
-    <xs:attribute name="unit" type="unit_temperature" default="K"/>
-  </xs:complexType>
-  
-  <xs:complexType name="time">
-    <xs:group ref="input_element_type"/>
-    <xs:attribute name="unit" type="unit_time" default="s"/>
-  </xs:complexType>
-  
-  <xs:complexType name="time_positive">
-    <xs:group ref="input_element_type_positive"/>
+  <xs:complexType name="test">
+    <xs:attribute name="value" type="xs:decimal" use="required"/>
     <xs:attribute name="unit" type="unit_time" default="s"/>
   </xs:complexType>
 
-  <xs:complexType name="space">
-    <xs:group ref="input_element_type"/>
-    <xs:attribute name="unit" type="unit_space" default="m"/>
-  </xs:complexType>
-
-  <xs:complexType name="velocity">
-    <xs:group ref="input_element_type"/>
-    <xs:attribute name="unit" type="unit_velocity" default="m/s"/>
-  </xs:complexType>
-
-  <xs:complexType name="angle">
-    <xs:group ref="input_element_type"/>
-    <xs:attribute name="unit" type="unit_angle" default="deg"/>
-  </xs:complexType>
-
-  <xs:complexType name="conductivity">
-    <xs:group ref="input_element_type"/>
-    <xs:attribute name="unit" type="unit_conductivity" default="W/mK"/>
-  </xs:complexType>
-
-  <xs:complexType name="heat_capacity">
-    <xs:group ref="input_element_type"/>
-    <xs:attribute name="unit" type="unit_heat_capacity" default="J/kgK"/>
-  </xs:complexType>
-
-  <xs:complexType name="heat_transfer_coefficient">
-    <xs:group ref="input_element_type"/>
-    <xs:attribute name="unit" type="unit_heat_transfer_coefficient" default="W/m2K"/>
-  </xs:complexType>
-
-  <xs:complexType name="heat_flux">
-    <xs:group ref="input_element_type"/>
-    <xs:attribute name="unit" type="unit_heat_flux" default="W/m2"/>
-  </xs:complexType>
-
-  <xs:complexType name="density">
-    <xs:group ref="input_element_type"/>
-    <xs:attribute name="unit" type="unit_density" default="kg/m3"/>
-  </xs:complexType>
-
-  <xs:complexType name="emissivity">
-    <xs:group ref="input_element_type"/>
-    <xs:attribute name="unit" type="null" default="null"/>
-  </xs:complexType>
-
-  <xs:complexType name="date">
-    <xs:simpleContent>
-      <xs:extension base="xs:nonNegativeInteger">
-        <xs:attribute name="year" type="date_year"/>
-        <xs:attribute name="month" type="date_month"/>
-        <xs:attribute name="day" type="date_day"/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-
-  
-  
-  
-  
-
-  
-  
-  
-  
-  
 
   <!-- UNITS -->
   <!-- UNITS -->
   <!-- UNITS -->
 
-  
-  
-  
-  
   <!-- UNIT VALUES in SimpleTypes -->
   <xs:simpleType name="unit_temperature">
     <xs:restriction base="xs:string">
@@ -645,6 +630,15 @@
       <xs:enumeration value="solid"/>
       <xs:enumeration value="liquid"/>
       <xs:enumeration value="gas"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- INPUT ELEMENT types in SimpleTypes -->
+  <xs:simpleType name ="input_element_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="constant"/>
+      <xs:enumeration value="variable"/>
+      <xs:enumeration value="function"/>
     </xs:restriction>
   </xs:simpleType>
 
