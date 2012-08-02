@@ -1,0 +1,62 @@
+<?xml version="1.0" standalone="yes"?>
+<case>
+<simulation>
+	<start_time unit="s"><constant>0</constant></start_time>
+	<end_time   unit="s"><constant>3600</constant></end_time>
+	<time_step  unit="s"><constant>60</constant></time_step>
+	<space_step unit="m"><constant>0.001</constant></space_step>
+	<initial_temperature unit="K"><constant>277</constant></initial_temperature>
+</simulation>
+<setup>
+	<materials>
+		<material name="polysterene" phase="solid">
+			<conductivity  unit="W/mK"><constant>0.034</constant></conductivity>
+			<heat_capacity  unit="J/kgK"><constant>657.</constant></heat_capacity>
+			<density  unit="kg/m3"><constant>35.</constant></density>
+			<emissivity  unit="-"><constant>0.</constant></emissivity>
+		</material>
+	</materials>
+	<geometry>
+		<height unit="m"><constant>1.0</constant></height>
+		<length unit="m"><constant>1.0</constant></length>
+		<tilt unit="deg"><constant>90</constant></tilt>
+	</geometry>
+	<layers>
+		<layer name="polystyrene">
+			<geometry>
+				<thickness unit="m"><constant>0.03</constant></thickness>
+			</geometry>
+			<material reference="polysterene"/>
+		</layer>
+	</layers>
+	<boundaries>
+		<boundary name="internal">
+			<temperature unit="K">
+				<variable>
+ 0 277.
+ 3600 300.
+ 7200 320.
+				</variable>
+			</temperature>
+			<heat_transfer_coefficient unit="W/m2K"><constant>8.1</constant></heat_transfer_coefficient>
+			<velocity unit="m/s"><constant>0.0</constant></velocity>
+			<heat_flux unit="W/m2"><constant>0.0</constant></heat_flux>
+		</boundary>
+		<boundary name="external">
+			<temperature unit="K"><constant>277.</constant></temperature>
+			<heat_transfer_coefficient unit="W/m2K"><constant>8.1</constant></heat_transfer_coefficient>
+			<velocity unit="m/s"><constant>0.0</constant></velocity>
+			<heat_flux unit="W/m2"><constant>0.0</constant></heat_flux>
+		</boundary>
+	</boundaries>
+</setup>
+<output>
+	<screen>
+		<time_step unit="s"><constant>60</constant></time_step>
+	</screen>
+	<file>
+		<time_step unit="s"><constant>60.</constant></time_step>
+		<space_step unit="m"><constant>0.001</constant></space_step>
+	</file>
+</output>
+</case>

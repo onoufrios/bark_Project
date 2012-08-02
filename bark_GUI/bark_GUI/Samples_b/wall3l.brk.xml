@@ -1,0 +1,74 @@
+<?xml version="1.0" standalone="yes"?>
+<case>
+<simulation>
+	<start_time unit="s"><constant>0</constant></start_time>
+	<end_time   unit="s"><constant>432000</constant></end_time>
+	<time_step  unit="s"><constant>3600</constant></time_step>
+	<space_step unit="m"><constant>0.01</constant></space_step>
+	<initial_temperature unit="K"><constant>300</constant></initial_temperature>
+</simulation>
+<setup>
+	<materials>
+		<material name="plaster" phase="solid">
+			<conductivity  unit="W/mK"><constant>1.</constant></conductivity>
+			<heat_capacity  unit="J/kgK"><constant>1000.</constant></heat_capacity>
+			<density  unit="kg/m3"><constant>1800.</constant></density>
+			<emissivity  unit="-"><constant>1.</constant></emissivity>
+		</material>
+		<material name="concrete" phase="solid"> 
+			<conductivity  unit="W/mK"><constant>2.</constant></conductivity>
+			<heat_capacity  unit="J/kgK"><constant>1000.</constant></heat_capacity>
+			<density  unit="kg/m3"><constant>2400.</constant></density>
+			<emissivity  unit="-"><constant>1.</constant></emissivity>
+		</material>
+	</materials>
+	<geometry>
+		<height unit="m"><constant>1.</constant></height>
+		<length unit="m"><constant>1.</constant></length>
+		<tilt unit="deg"><constant>90.</constant></tilt>
+	</geometry>
+	<layers>
+		<layer name="plaster_in">
+			<geometry>
+				<thickness unit="m"><constant>0.02</constant></thickness>
+			</geometry>
+			<material reference="plaster"/>
+		</layer>
+		<layer name="concrete">
+			<geometry>
+				<thickness unit="m"><constant>0.30</constant></thickness>
+			</geometry>
+			<material reference="concrete"/>
+		</layer>
+		<layer name="plaster_out">
+			<geometry>
+				<thickness unit="m"><constant>0.02</constant></thickness>
+			</geometry>
+			<material reference="plaster"/>
+		</layer>
+	</layers>
+	<boundaries>
+		<boundary name="internal">
+			<temperature unit="K"><constant>300.</constant></temperature>
+			<heat_transfer_coefficient unit="W/m2K"><constant>7.7</constant></heat_transfer_coefficient>
+			<velocity unit="m/s"><constant>0.0</constant></velocity>
+			<heat_flux unit="W/m2"><constant>0.0</constant></heat_flux>
+		</boundary>
+		<boundary name="external">
+			<temperature unit="K"><constant>273.</constant></temperature>
+			<heat_transfer_coefficient unit="W/m2K"><constant>7.7</constant></heat_transfer_coefficient>
+			<velocity unit="m/s"><constant>0.0</constant></velocity>
+			<heat_flux unit="W/m2"><constant>0.0</constant></heat_flux>
+		</boundary>
+	</boundaries>
+</setup>
+<output>
+	<screen>
+		<time_step unit="s"><constant>14400</constant></time_step>
+	</screen>
+	<file>
+		<time_step unit="s"><constant>3600.</constant></time_step>
+		<space_step unit="m"><constant>0.02</constant></space_step>
+	</file>
+</output>
+</case>

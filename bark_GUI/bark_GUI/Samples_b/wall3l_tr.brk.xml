@@ -1,0 +1,198 @@
+<?xml version="1.0" standalone="yes"?>
+<case>
+<simulation>
+	<start_time unit="s"><constant>0</constant></start_time>
+	<end_time   unit="s"><constant>432000</constant></end_time>
+	<time_step  unit="s"><constant>3600</constant></time_step>
+	<space_step unit="m"><constant>0.01</constant></space_step>
+	<initial_temperature unit="K"><constant>295</constant></initial_temperature>
+</simulation>
+<setup>
+	<materials>
+		<material phase="solid" name="plaster">
+			<conductivity  unit="W/mK"><constant>1.</constant></conductivity>
+			<heat_capacity  unit="J/kgK"><constant>1000.</constant></heat_capacity>
+			<density  unit="kg/m3"><constant>1800.</constant></density>
+			<emissivity  unit="-"><constant>0.</constant></emissivity>
+		</material>
+		<material phase="solid" name="concrete"> 
+			<conductivity  unit="W/mK"><constant>2.</constant></conductivity>
+			<heat_capacity  unit="J/kgK"><constant>1000.</constant></heat_capacity>
+			<density  unit="kg/m3"><constant>2400.</constant></density>
+			<emissivity  unit="-"><constant>0.</constant></emissivity>
+		</material>
+	</materials>
+	<geometry>
+		<height unit="m"><constant>1.</constant></height>
+		<length unit="m"><constant>1.</constant></length>
+		<tilt unit="deg"><constant>90.</constant></tilt>
+	</geometry>
+	<layers>
+		<layer name="plaster_in">
+			<geometry>
+				<thickness unit="m"><constant>0.02</constant></thickness>
+			</geometry>
+			<material reference="plaster"/>
+		</layer>
+		<layer name="concrete">
+			<geometry>
+				<thickness unit="m"><constant>0.30</constant></thickness>
+			</geometry>
+			<material reference="concrete"/>
+		</layer>
+		<layer name="plaster_out">
+			<geometry>
+				<thickness unit="m"><constant>0.02</constant></thickness>
+			</geometry>
+			<material reference="plaster"/>
+		</layer>
+	</layers>
+	<boundaries>
+		<boundary name="internal">
+			<temperature unit="K"><constant>295.</constant></temperature>
+			<heat_transfer_coefficient unit="W/m2K"><constant>7.7</constant></heat_transfer_coefficient>
+			<velocity unit="m/s"><constant>0.0</constant></velocity>
+			<heat_flux unit="W/m2"><constant>0.0</constant></heat_flux>
+		</boundary>
+		<boundary name="external">
+			<temperature unit="K">
+				<variable>
+ 0 277.371
+ 3600 277.589
+ 7200 277.004
+ 10800 276.608
+ 14400 276.251
+ 18000 276.538
+ 21600 276.036
+ 25200 276.123
+ 28800 275.927
+ 32400 274.151
+ 36000 274.516
+ 39600 276.258
+ 43200 277.406
+ 46800 281.61
+ 50400 282.78
+ 54000 283.7
+ 57600 284.68
+ 61200 285.53
+ 64800 284.81
+ 68400 282.21
+ 72000 280.83
+ 75600 279.424
+ 79200 278.753
+ 82800 277.805
+ 86400 277.371
+ 90000 277.589
+ 93600 277.004
+ 97200 276.608
+ 100800 276.251
+ 104400 276.538
+ 108000 276.036
+ 111600 276.123
+ 115200 275.927
+ 118800 274.151
+ 122400 274.516
+ 126000 276.258
+ 129600 277.406
+ 133200 281.61
+ 136800 282.78
+ 140400 283.7
+ 144000 284.68
+ 147600 285.53
+ 151200 284.81
+ 154800 282.21
+ 158400 280.83
+ 162000 279.424
+ 165600 278.753
+ 169200 277.805
+ 172800 277.371
+ 176400 277.589
+ 180000 277.004
+ 183600 276.608
+ 187200 276.251
+ 190800 276.538
+ 194400 276.036
+ 198000 276.123
+ 201600 275.927
+ 205200 274.151
+ 208800 274.516
+ 212400 276.258
+ 216000 277.406
+ 219600 281.61
+ 223200 282.78
+ 226800 283.7
+ 230400 284.68
+ 234000 285.53
+ 237600 284.81
+ 241200 282.21
+ 244800 280.83
+ 248400 279.424
+ 252000 278.753
+ 255600 277.805
+ 259200 277.371
+ 262800 277.589
+ 266400 277.004
+ 270000 276.608
+ 273600 276.251
+ 277200 276.538
+ 280800 276.036
+ 284400 276.123
+ 288000 275.927
+ 291600 274.151
+ 295200 274.516
+ 298800 276.258
+ 302400 277.406
+ 306000 281.61
+ 309600 282.78
+ 313200 283.7
+ 316800 284.68
+ 320400 285.53
+ 324000 284.81
+ 327600 282.21
+ 331200 280.83
+ 334800 279.424
+ 338400 278.753
+ 342000 277.805
+ 345600 277.371
+ 349200 277.589
+ 352800 277.004
+ 356400 276.608
+ 360000 276.251
+ 363600 276.538
+ 367200 276.036
+ 370800 276.123
+ 374400 275.927
+ 378000 274.151
+ 381600 274.516
+ 385200 276.258
+ 388800 277.406
+ 392400 281.61
+ 396000 282.78
+ 399600 283.7
+ 403200 284.68
+ 406800 285.53
+ 410400 284.81
+ 414000 282.21
+ 417600 280.83
+ 421200 279.424
+ 424800 278.753
+ 428400 277.805
+ 432000 277.371
+				</variable>
+		 	</temperature>
+			<heat_transfer_coefficient unit="W/m2K"><constant>7.7</constant></heat_transfer_coefficient>
+			<velocity unit="m/s"><constant>0.0</constant></velocity>
+			<heat_flux unit="W/m2"><constant>0.0</constant></heat_flux>
+		</boundary>
+	</boundaries>
+</setup>
+<output>
+	<screen>
+		<time_step unit="s"><constant>14400</constant></time_step>
+	</screen>
+	<file>
+		<time_step unit="s"><constant>3600.</constant></time_step>
+		<space_step unit="m"><constant>0.02</constant></space_step>
+	</file>
+</output>
+</case>
